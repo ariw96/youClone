@@ -24,6 +24,16 @@ const Logo = styled.div`
 const Img = styled.img`
 	height: 25px;
 `;
+const Item = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	cursor: pointer;
+	padding: 7.5px 0px;
+	&:hover {
+		background-color: ${({ theme }) => theme.soft};
+	}
+`;
 
 function Menu() {
 	return (
@@ -35,6 +45,7 @@ function Menu() {
 					YouTube
 				</Logo>
 				{/* </Link> */}
+				<Item>Home</Item>
 			</Wrapper>
 		</Container>
 	);
