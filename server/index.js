@@ -2,9 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import chalk from "chalk";
-import userRoutes from "./routes/usersRoute.js";
+import cookieParser from "cookie-parser";
+import userRoute from "./routes/usersRoute.js";
+import authRoute from "./routes/authRoute.js";
+import videoRoute from "./routes/videoRoute.js";
 
-console.log();
 dotenv.config();
 const app = express();
 
@@ -19,11 +21,11 @@ const connect = () => {
 		});
 };
 //middlewares
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(express.json());
-// app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-// app.use("/api/videos", videoRoutes);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/videos", videoRoute);
 // app.use("/api/comments", commentRoutes);
 
 //error handler
