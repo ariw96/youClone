@@ -1,5 +1,7 @@
-import React from "react";
 import styled from "styled-components";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
 	display: flex;
@@ -64,19 +66,55 @@ const Link = styled.span`
 `;
 
 const SignIn = () => {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	// const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await axios.post("/auth/signin", { email, password });
+
+			console.log(res.data);
+			navigate("/");
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const handleSignUp = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await axios.post("/auth/signup", { email, password, name });
+			navigate("/");
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	return (
 		<Container>
 			<Wrapper>
 				<Title>Sign in</Title>
 				<SubTitle>to continue to LamaTube</SubTitle>
-				<Input placeholder="username" />
-				<Input type="password" placeholder="password" />
-				<Button>Sign in</Button>
+				<Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+				<Input
+					type="password"
+					placeholder="password"
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<Button onClick={handleLogin}>Sign in</Button>
 				<Title>or</Title>
-				<Input placeholder="username" />
-				<Input placeholder="email" />
-				<Input type="password" placeholder="password" />
-				<Button>Sign up</Button>
+				<Input
+					placeholder="username"
+					onChange={(e) => setName(e.target.value)}
+				/>
+				<Input placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+				<Input
+					type="password"
+					placeholder="password"
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<Button onClick={handleSignUp}>Sign Up</Button>
 			</Wrapper>
 			<More>
 				English(USA)
