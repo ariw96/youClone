@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRoute from "./routes/usersRoute.js";
 import authRoute from "./routes/authRoute.js";
 import videoRoute from "./routes/videoRoute.js";
+import commentRoute from "./routes/commentRoute.js";
 
 dotenv.config();
 const app = express();
@@ -26,7 +27,7 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/videos", videoRoute);
-// app.use("/api/comments", commentRoutes);
+app.use("/api/comments", commentRoute);
 
 //error handler
 app.use((err, req, res, next) => {
